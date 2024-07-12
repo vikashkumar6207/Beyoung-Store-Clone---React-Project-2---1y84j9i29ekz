@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.men_menu{
+    position: relative;
+}
+.men_submenu{
+    display: none;
+
+}
+
+.men_menu:hover .men_submenu{
+    display: block;
+    top: 95px;
+    left: 0;
+    position: fixed;
+   
+
+}
+
+.list_item p:hover{
+    color: #ffdd00;
+}
