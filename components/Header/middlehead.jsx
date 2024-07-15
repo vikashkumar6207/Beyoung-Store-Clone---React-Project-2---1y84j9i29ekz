@@ -6,7 +6,7 @@ import { CiLocationOn } from "react-icons/ci";
 const Middlehead = () => {
   return (
     <>
-    <div className='flex justify-between items-center bg-black text-white pl-20 pr-20'>
+    <div className='flex justify-between items-center bg-black text-white pl-3 pr-3'>
         <span className='flex items-center'>
         <CiLocationOn />TRACK YOUR ORDER
         </span>

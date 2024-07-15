@@ -2,7 +2,7 @@ import React from 'react'
 
 const Hovercomp = () => {
   return (
-    <div className="flex w-screen h-screen bg-white">
+    <div className="flex w-screen h-screen bg-white hover_comp_container">
         <div className='flex h-screen w-screen bg-white gap-36 mt-10 mr-10 ml-10'>
     <div className='list_item'>
       <div className="font-bold">Topwear</div>

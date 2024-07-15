@@ -1,10 +1,15 @@
-import Mencomponent from '@/components/home/Homecomponent';
-import React from 'react'
 
+import React from 'react'
+import Mencomponent from '@/components/Men/Mencomponent';
+import Menpagecomp from '@/components/Men/Menpagecomp';
 const Men = () => {
   return (
     <>
-    <h1>Men</h1>
+    <div>
+
+      {/* <Mencomponent /> */}
+      <Menpagecomp />
+    </div>
     </>
   )
 }

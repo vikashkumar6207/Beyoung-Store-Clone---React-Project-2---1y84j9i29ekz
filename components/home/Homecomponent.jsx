@@ -7,7 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 const Homecomponent = () => {
   return (
     <>
-      <Carousel autoPlay infiniteLoop>
+      <Carousel autoPlay infiniteLoop showThumbs={false}>
         <div>
           <img src="./assets/home_Img.png" alt="" />
         </div>

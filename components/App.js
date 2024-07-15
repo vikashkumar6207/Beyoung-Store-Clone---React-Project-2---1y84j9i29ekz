@@ -1,9 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
 import Homecomponent from "./home/Homecomponent";
 import Offercomponent from "./home/Offercomponent";
+import Mencomponent from "./Men/Mencomponent";
+import Womencomp from "./Women/Womencomp";
+import Singleproduct from "./GetSingleProduct/Singleproduct";
 
 function App() {
-  async function fetchAPI() {
+  const [product, setProduct] = useState([]);
+  const [category, setCategory] = useState("All");
+  const [type, setType] = useState();
+
+  // set category in localStorage
+  useEffect(() => {
+    localStorage.setItem("category", category);
+  }, [category]);
+
+  /* async function homepageUiApi() {
     const myHeaders = new Headers();
     myHeaders.append("projectId", "zx5u429ht9oj");
 
@@ -13,29 +26,79 @@ function App() {
       redirect: "follow",
     };
 
-    fetch(
-      "https://learn.newtonschool.co/n/api/v1/ecommerce/clothes/products",
+    const response = await fetch(
+      "https://academics.newtonschool.co/api/v1/ecommerce/clothes/categories",
       requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
-  }
+    );
+    const data = await response.json();
+    setProduct(data.data);
+    console.log("homepageUiApi", data);
+  } */
 
-  useEffect(() => {
-    fetchAPI();
-  }, []);
+  // useEffect(() => {
+  //   homepageUiApi();
+  // }, []);
+
+ /*  useEffect(() => {
+    async function categoryItemFunction() {
+      const myHeaders = new Headers();
+      myHeaders.append("projectId", "zx5u429ht9oj");
+
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?subCategory=${category}`,
+        requestOptions
+      );
+      const data = response.json();
+      console.log("categoryItemFunction", data.data);
+      setType(data);
+    }
+    categoryItemFunction();
+  }, [category]); */
+
   return (
-    <div id="App">
-      <Homecomponent />
-      <Offercomponent />
-      <img src="./assets/URBAN_Img.jpg" alt="" className="w-100vw" />
+    <>
+      <div id="App">
+        <div className="mb-20">
+          <Homecomponent />
+        </div>
+        <div className="mb-20">
+          <Offercomponent />
+        </div>
+        <img src="./assets/URBAN_Img.jpg" alt="" className="w-100vw" />
 
-      <div className="flex justify-center gap-4 m-12">
-        <button className="h-8 pt-1 pb-1 pl-4 pr-4 rounded-3xl bg-black text-white ">Urban Shirts</button>
-        <button className="h-8 pt-1 pb-1 pl-4 pr-4 border border-black rounded-3xl" >Cargo Pants</button>
+        <div className="flex justify-center gap-4 m-12">
+          <button className="h-8 pt-1 pb-1 pl-4 pr-4 rounded-3xl bg-black text-white ">
+            Urban Shirts
+          </button>
+          <button className="h-8 pt-1 pb-1 pl-4 pr-4 border border-black rounded-3xl">
+            Cargo Pants
+          </button>
+        </div>
+        <div className="flex">
+          {product.map((item) => {
+            return (
+              <p key={item} onClick={() => setCategory(item)}>
+                {item}
+              </p>
+            );
+          })}
+        </div>
+        <div>
+          <p className="gender_heading mb-10">FOR MEN</p>
+          <Mencomponent />
+        </div>
+        <div className="mt-10 mb-10">
+          <p className="gender_heading mb-10">FOR WOMEN</p>
+          <Womencomp />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

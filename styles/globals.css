@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:  Arial, sans-serif;
 }
 
 .men_menu{
@@ -21,10 +22,27 @@
     top: 95px;
     left: 0;
     position: fixed;
+    z-index: 4;
    
 
 }
 
 .list_item p:hover{
     color: #ffdd00;
+}
+
+.gender_heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100vw;
+    background: linear-gradient(90deg, rgba(248, 235, 39, 0) 0%, #f8eb27 48.11%, rgba(248, 235, 39, 0) 100%);
+}
+
+
+
+.login_Img{
+    height: 176px;
+    width: 380px;
 }

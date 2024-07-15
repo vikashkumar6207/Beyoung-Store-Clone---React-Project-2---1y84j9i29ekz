@@ -4,7 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 const Offercomponent = () => {
   return (
     <>
-     <Carousel autoPlay infiniteLoop>
+     <Carousel autoPlay infiniteLoop showThumbs={false}>
         <div>
           <img src="./assets/offer1.jpg" alt="" />
         </div>
