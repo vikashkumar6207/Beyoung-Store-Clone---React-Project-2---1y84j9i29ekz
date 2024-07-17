@@ -1,15 +1,25 @@
 import Productdetails from "@/components/ProductDetails/Productdetails";
+import useUser from "@/customHooks/useUser";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
 const Singleproduct = () => {
+
+  const router = useRouter();
+    // const {getToken} = useUser();
+
+   /*  if(!getToken){
+      router.push('/login');
+    } */
+    
   const [product, setProduct] = useState({});
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [size, setSize] = useState([]);
 
   async function singleproductApi() {
-    const url = `https://academics.newtonschool.co/api/v1/ecommerce/product/${localStorage.getItem("productId")}`;
+    const url = `https://academics.newtonschool.co/api/v1/ecommerce/product/${sessionStorage.getItem("productId")}`;
     const myHeaders = new Headers();
     myHeaders.append("projectID", "zx5u429ht9oj");
 
@@ -38,7 +48,7 @@ const Singleproduct = () => {
 
   return (
     <>
-
+      
       <div className="flex gap-10 ">
         <div className="flex gap-2 w-full ml-2">
           <div>
@@ -101,7 +111,7 @@ const Singleproduct = () => {
       </div>
       <div className="mt-8">
       <Productdetails product={product} />
-      </div>
+      </div>      
     </>
   );
 };

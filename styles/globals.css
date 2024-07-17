@@ -2,47 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family:  Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-.men_menu{
-    position: relative;
+.men_menu {
+  position: relative;
 }
-.men_submenu{
-    display: none;
-
-}
-
-.men_menu:hover .men_submenu{
-    display: block;
-    top: 95px;
-    left: 0;
-    position: fixed;
-    z-index: 4;
-   
-
+.men_submenu {
+  display: none;
 }
 
-.list_item p:hover{
-    color: #ffdd00;
+.men_menu:hover .men_submenu {
+  display: block;
+  top: 95px;
+  left: 0;
+  position: fixed;
+  z-index: 4;
 }
 
-.gender_heading{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 100vw;
-    background: linear-gradient(90deg, rgba(248, 235, 39, 0) 0%, #f8eb27 48.11%, rgba(248, 235, 39, 0) 100%);
+.list_item p:hover {
+  color: #ffdd00;
 }
 
+.gender_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100vw;
+  background: linear-gradient(
+    90deg,
+    rgba(248, 235, 39, 0) 0%,
+    #f8eb27 48.11%,
+    rgba(248, 235, 39, 0) 100%
+  );
+}
 
+.login_Img {
+  height: 176px;
+  width: 380px;
+}
 
-.login_Img{
-    height: 176px;
-    width: 380px;
+.menpage_aside {
+  width: 20vw;
+  position: fixed;
+  height: 100vh;
+}
+
+.menpage_main {
+  width: calc(100vw - 24vw);
+  margin-left: 22vw;
+}
+
+/* ----------- */
+.women_aside{
+  width: 20vw;
+  height: 100vh;
+}
+
+.womenpage_main{
+  width: calc(100vw - 24vw);
+  margin-left: 1vw;
 }

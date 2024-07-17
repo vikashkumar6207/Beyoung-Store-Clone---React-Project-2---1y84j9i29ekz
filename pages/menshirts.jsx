@@ -2,7 +2,9 @@ import React from 'react'
 
 const Menshirts = () => {
   return (
-    <div>Menshirts</div>
+    <div className='flex justify-center'>
+    <img src="./assets/comming-soon.jpg" alt="" />
+  </div>
   )
 }
 

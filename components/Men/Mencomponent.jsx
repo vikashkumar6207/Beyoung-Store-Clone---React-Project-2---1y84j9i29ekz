@@ -33,12 +33,12 @@ const Mencomponent = () => {
   return (
     <>
       <div className="flex overflow-auto gap-4 ">
-        {mencloth && mencloth.map((item) => {
+        {mencloth && mencloth.map((item, index) => {
             const {_id,displayImage,subCategory,size} = item;
           return (
-            <div className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden">
+            <div key={index} className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden">
               <div onClick={()=>{
-                   localStorage.setItem('productId', _id);
+                   sessionStorage.setItem('productId', _id);
                     router.push('/singleproduct')
                   }
                   }>

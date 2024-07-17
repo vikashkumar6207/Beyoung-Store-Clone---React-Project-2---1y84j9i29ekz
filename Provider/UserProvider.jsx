@@ -26,10 +26,10 @@ const UserProvider = (props) => {
   const { children } = props;
 
   function tokenHandler(token) {
-   
-        setToken(token);
-        sessionStorage.setItem("token", token);
-  }
+    console.log('providertoken',token);
+      setToken(token);
+      // sessionStorage.setItem("token", token);
+}
   function nameHandler(name) {
     
         setName(name);

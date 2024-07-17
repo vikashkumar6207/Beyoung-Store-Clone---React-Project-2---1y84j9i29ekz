@@ -5,18 +5,21 @@ import Offercomponent from "./home/Offercomponent";
 import Mencomponent from "./Men/Mencomponent";
 import Womencomp from "./Women/Womencomp";
 import Singleproduct from "./GetSingleProduct/Singleproduct";
+import WomenComponent from "./Women/WomenComponent";
+import UserProvider from "@/Provider/UserProvider";
 
 function App() {
   const [product, setProduct] = useState([]);
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState("");
   const [type, setType] = useState();
 
   // set category in localStorage
+  console.log("category", category);
   useEffect(() => {
     localStorage.setItem("category", category);
   }, [category]);
 
-  /* async function homepageUiApi() {
+  async function homepageUiApi() {
     const myHeaders = new Headers();
     myHeaders.append("projectId", "zx5u429ht9oj");
 
@@ -33,33 +36,11 @@ function App() {
     const data = await response.json();
     setProduct(data.data);
     console.log("homepageUiApi", data);
-  } */
+  }
 
-  // useEffect(() => {
-  //   homepageUiApi();
-  // }, []);
-
- /*  useEffect(() => {
-    async function categoryItemFunction() {
-      const myHeaders = new Headers();
-      myHeaders.append("projectId", "zx5u429ht9oj");
-
-      const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow",
-      };
-
-      const response = await fetch(
-        `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?subCategory=${category}`,
-        requestOptions
-      );
-      const data = response.json();
-      console.log("categoryItemFunction", data.data);
-      setType(data);
-    }
-    categoryItemFunction();
-  }, [category]); */
+  useEffect(() => {
+    homepageUiApi();
+  }, []);
 
   return (
     <>
@@ -80,9 +61,11 @@ function App() {
             Cargo Pants
           </button>
         </div>
-        <div className="flex">
+
+        <div className="flex gap-3">
           {product.map((item) => {
             return (
+        
               <p key={item} onClick={() => setCategory(item)}>
                 {item}
               </p>
@@ -95,9 +78,10 @@ function App() {
         </div>
         <div className="mt-10 mb-10">
           <p className="gender_heading mb-10">FOR WOMEN</p>
-          <Womencomp />
+          <WomenComponent />
         </div>
       </div>
+    
     </>
   );
 }

@@ -1,9 +1,19 @@
 import Link from 'next/link';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiLocationOn } from "react-icons/ci";
 
 
 const Middlehead = () => {
+
+
+  const [istoken, setIstoken] = useState(false);
+ 
+ useEffect(() => {
+  if(sessionStorage.getItem("istoken")){
+   setIstoken(true);
+   console.log('setIstoken middle', istoken);
+  }
+ },[istoken]);
   return (
     <>
     <div className='flex justify-between items-center bg-black text-white pl-3 pr-3'>
@@ -11,7 +21,8 @@ const Middlehead = () => {
         <CiLocationOn />TRACK YOUR ORDER
         </span>
         <span className='flex justify-between gap-2'>
-            <Link href={'/login'}>LOG IN | SIGN UP</Link>
+            
+           {istoken ? (<Link href={'/myaccount'}>MY ACCOUNT | LOG OUT</Link>) : (<Link href={'/login'}>LOG IN | SIGN UP</Link>)}
  
         </span>
     </div>
