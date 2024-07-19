@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { UserContext } from "@/Provider/UserProvider";
+import useUser from "@/customHooks/useUser";
 const Logincomponent = () => {
   const router = useRouter();
   const ContextData = useContext(UserContext);
+  // const context = useUser();
   const { tokenHandler, nameHandler, emailHandler } = ContextData;
+  console.log("ContextData", ContextData);
+  console.log(ContextData);
 
   const [success, setSuccess] = useState("");
   const [Error, setError] = useState();
@@ -38,21 +42,19 @@ const Logincomponent = () => {
     try {
       const response = await fetch(url, requestOptions);
       const data = await response.json();
-      console.log("LOGIN DATA", data);
+      // console.log("LOGIN DATA", data);
 
       const token = data?.token;
       const name = data?.data?.user?.name;
       const email = data?.data?.user?.email;
 
-    
-
+      console.log("LOGIN", name, email, token);
       if (token && name) {
-        console.log("LOGIN", name, email, token);
-        // tokenHandler(token);
-        tokenfun(token);
+        tokenHandler(token);
+        // tokenfun(token);
         nameHandler(name);
         emailHandler(email);
-       
+
         setSuccess("Login successful...");
         setTimeout(() => {
           router.push("/");
@@ -61,14 +63,15 @@ const Logincomponent = () => {
         setError(data.message || "Login faild!");
       }
     } catch (error) {
-      setError(error);
+      setError("An error occurred. Please try again.");
+      console.error("Error:", error);
     }
   }
-  function tokenfun(token) {
-    console.log('istoken',token);
-      // setToken(token);
-      sessionStorage.setItem("istoken", token);
-}
+  //   function tokenfun(token) {
+  //     console.log('istoken',token);
+  //       // setToken(token);
+  //       sessionStorage.setItem("istoken", token);
+  // }
 
   function formHandler(e, key) {
     const val = e.target.value;
@@ -80,10 +83,25 @@ const Logincomponent = () => {
       };
     });
   }
-  useEffect(() => {}, []);
-  // useEffect(()=>{
-  //   sessionStorage.setItem("name", 'vikash');
-  // },[])
+
+  function submitLoginHandler(e) {
+    e.preventDefault();
+
+    if (loginstate.email === "" && loginstate.password === "" && loginstate.name === "") {
+      setError("The email and password is required !");
+    } else if (loginstate.email === "") {
+      setError("The email is required !");
+    } else if (loginstate.password === "") {
+      setError("The password is required !");
+    } else if (loginstate.name === "") {
+      setError("The name is required !");
+    } else {
+      submitForm();
+    }
+  }
+
+  useEffect(()=>{},[]);
+
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-inherit">
@@ -106,14 +124,7 @@ const Logincomponent = () => {
               </div>
               <p>Get Exciting Offers & Track Order</p>
             </div>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                submitForm();
-                console.log("preventDefault", loginstate);
-              }}
-              className="flex flex-col gap-5"
-            >
+            <form onSubmit={submitLoginHandler} className="flex flex-col gap-5">
               {Error ? (
                 <h1 className="text-red-600">{Error}</h1>
               ) : (
@@ -122,28 +133,38 @@ const Logincomponent = () => {
               <input
                 type="text"
                 placeholder="Full name*"
-                required
+                // required
                 className="pl-2 h-10 w-80 border rounded"
-                onChange={(e) => formHandler(e, "name")}
+                onChange={(e) => {
+                  formHandler(e, "name")
+                  setError('')
+                }}
               />
               <input
                 type="email"
                 placeholder="Email Address*"
-                required
+                // required
                 className="pl-2 h-10 w-80 border rounded"
-                onChange={(e) => formHandler(e, "email")}
+                onChange={(e) => {
+                  formHandler(e, "email")
+                  setError('')
+                }}
               />
               <input
                 type="password"
                 placeholder="password*"
-                required
+                // required
                 className=" pl-2 h-10 w-80 border rounded"
-                onChange={(e) => formHandler(e, "password")}
+                onChange={(e) => {
+                   formHandler(e, "password")
+                   setError('')
+                  }}
               />
               <button
                 type="submit"
                 className="w-80 h-10 rounded font-bold"
                 style={{ background: "#51cccc", color: "#fff" }}
+                
               >
                 Sign In
               </button>

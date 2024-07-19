@@ -1,37 +1,46 @@
-import React, { createContext, useState } from "react";
+"use client"
+import React, { createContext, useEffect, useState } from "react";
 
 export const UserContext = React.createContext({
   getName: "",
   getToken: "",
+  getCategoey: "",
   nameHandler: () => {},
   tokenHandler: () => {},
   emailHandler: () => {},
+  categoryHandler: () => {},
   logout: ()=>{},
   setSearchText: null,
 });
 
 const UserProvider = (props) => {
-  const [getToken, setToken] = useState(sessionStorage.getItem("token"));
-  const [getName, setName] = useState(sessionStorage.getItem("name"));
-  const [getEmail, setEmail] = useState(sessionStorage.getItem("email"));
+  const [getToken, setToken] = useState();
+  const [getName, setName] = useState();
+  const [getEmail, setEmail] = useState();
+  const [getCategoey, setCategory] = useState();
 
+  useEffect(()=>{
+    setToken(sessionStorage.getItem("token") || "");
+    setName(sessionStorage.getItem("name") || "");
+    setEmail(sessionStorage.getItem("email") || "");
+    setCategory(sessionStorage.getItem("category") || "");
+  },[])
   const [searchText, setSearchText] = useState('');
+  // const [getCategoey, setCategory] = useState('');
 
-
-
-
-
-  // console.log('USER PROVIDER LOGS',getName, getToken,getEmail );
+  console.log('USER PROVIDER LOGS', getName, getToken,getEmail );
 
   const { children } = props;
 
   function tokenHandler(token) {
     console.log('providertoken',token);
       setToken(token);
-      // sessionStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
 }
+
+
   function nameHandler(name) {
-    
+
         setName(name);
         sessionStorage.setItem("name", name);
   }
@@ -39,26 +48,31 @@ const UserProvider = (props) => {
     setEmail(email);
     sessionStorage.setItem("email",email);
   }
+
+  function categoryHandler(category){
+    setCategory(category);
+    sessionStorage.setItem('category', category);
+  }
   const logout = () => {
     setName("");
     setToken("");
     sessionStorage.clear();
   };
- 
 
   const valueObj = {
     getName,
     getToken,
+   
     tokenHandler,
     nameHandler,
     emailHandler,
     searchText,
     setSearchText,
+
+    getCategoey,
+    categoryHandler,
     logout,
   };
-
-
- 
 
   return (
     <>
@@ -68,3 +82,4 @@ const UserProvider = (props) => {
 };
 
 export default UserProvider;
+

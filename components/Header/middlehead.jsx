@@ -10,10 +10,11 @@ const Middlehead = () => {
  
  useEffect(() => {
   if(sessionStorage.getItem("istoken")){
+    
    setIstoken(true);
    console.log('setIstoken middle', istoken);
   }
- },[istoken]);
+ },[]);
   return (
     <>
     <div className='flex justify-between items-center bg-black text-white pl-3 pr-3'>

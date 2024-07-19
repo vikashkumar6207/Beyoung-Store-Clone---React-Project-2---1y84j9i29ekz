@@ -8,6 +8,7 @@ import Hovercomp from "@/components/Hovercomponents/Hovercomp";
 import Womenhover from "../Hovercomponents/Womenhover";
 
 const Navbar = () => {
+  // const router = ();
   return (
     <>
       <nav className="flex justify-between p-2 items-center border-b">
@@ -29,7 +30,7 @@ const Navbar = () => {
               Men
             </Link>
             <div className="men_submenu flex justify-center">
-             <Hovercomp />
+              <Hovercomp />
             </div>
           </li>
           <li>
@@ -40,7 +41,7 @@ const Navbar = () => {
               Women
             </Link>
             <div className="men_submenu flex justify-center">
-             <Womenhover />
+              <Womenhover />
             </div>
           </li>
           <li>
@@ -80,11 +81,25 @@ const Navbar = () => {
           <span>
             <CiSearch />
           </span>
-          <span>
-            <CiHeart />
+          <span className=" relative ">
+            <Link href="/favorites">
+              <CiHeart />
+            </Link>
+            <span
+              className="flex items-center justify-center absolute h-3 w-3 bg-yellow-300 rounded-full"
+              style={{ fontSize: "10px", top: "-9px", right: "-3px" }}
+            >
+              0
+            </span>
           </span>
-          <span>
+          <span className="relative">
             <MdOutlineShoppingCart />
+            <span
+              className="flex items-center justify-center absolute h-3 w-3 bg-yellow-300 rounded-full"
+              style={{ fontSize: "10px", top: "-9px", right: "-3px" }}
+            >
+              0
+            </span>
           </span>
         </div>
       </nav>

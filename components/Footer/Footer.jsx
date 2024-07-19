@@ -37,8 +37,8 @@ const Footer = () => {
             <div>
                 <h1 className="font-bold text-yellow-400">DOWNLOAD THE APP</h1>
                 <div className="flex gap-2">
-                <img src="./assets/11Play-Store-footer.png" alt="image" className="h-14 w-44" />
-                <img src="./assets/12App-store-footer.png" alt="image" className="h-14 w-44"/>
+                <img src="./assets/11Play-Store-footer.png" alt="image" style={{height: 'auto', width: '14.5vw'}} />
+                <img src="./assets/12App-store-footer.png" alt="image" style={{height: 'auto', width: '14.5vw'}}/>
                 </div>
             </div>
           </div>

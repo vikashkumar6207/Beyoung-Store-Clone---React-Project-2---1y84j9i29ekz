@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 const Singleproduct = () => {
 
   const router = useRouter();
@@ -17,6 +19,14 @@ const Singleproduct = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [size, setSize] = useState([]);
+  const [like, setLike] = useState(false);
+
+
+
+
+  // const [likeItem, setLikeItem] = useState([]);
+  // const id = sessionStorage.getItem("productId");
+  // const token = sessionStorage.getItem("productId")
 
   async function singleproductApi() {
     const url = `https://academics.newtonschool.co/api/v1/ecommerce/product/${sessionStorage.getItem("productId")}`;
@@ -46,6 +56,35 @@ const Singleproduct = () => {
     setSelectedImage(image);
   };
 
+
+   function addFavorites(){
+    const token = sessionStorage.getItem('token');
+    // console.log('sessionStorage token', token)
+    const id = sessionStorage.getItem("productId");
+    console.log('sessionStorage productId', id);
+    const url = `https://academics.newtonschool.co/api/v1/ecommerce/wishlist/`;
+    const myHeaders = new Headers();
+    myHeaders.append("projectID", "zx5u429ht9oj");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    
+    const raw = JSON.stringify({
+      "productId": {id}
+    });
+    
+    const requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+    
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((result) => console.log('addFavorites',result))
+      .catch((error) => console.error('addFavorites',error));
+  } 
+
   return (
     <>
       
@@ -53,7 +92,9 @@ const Singleproduct = () => {
         <div className="flex gap-2 w-full ml-2">
           <div>
             {images && images.map((item, index) => {
+      
               return (
+            
                 <img
                   key={index}
                   src={item}
@@ -61,12 +102,19 @@ const Singleproduct = () => {
                   className="h-24 w-36 cursor-pointer"
                   onClick={() => handleImageClick(item)}
                 />
+                
+                
               );
             })}
           </div>
           <div>
             {selectedImage ? (
+              <div className="relative ">
+                <p onClick={()=> setLike(!like)} className="overflow-hidden flex items-center justify-center absolute right-2 top-2 h-8 w-8 rounded-full bg-yellow-50">
+                {like ? <FaHeart  />  : <CiHeart className="h-5 w-5" onClick={()=> {addFavorites()}} />}
+                </p>
               <img src={selectedImage} alt={product.name} className="w-full" />
+              </div>
             ) : (
               <p>Loading image...</p>
             )}

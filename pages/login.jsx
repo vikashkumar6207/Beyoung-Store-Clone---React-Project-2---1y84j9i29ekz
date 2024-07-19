@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import Logincomponent from "@/pages/Authentication/login";
 import Signupcomponent from "@/pages/Authentication/signupcomponent";
@@ -12,12 +13,12 @@ const Login = () => {
   const router = useRouter()
   const [login, setLogin] = useState(false);
 
-  useEffect(() => {
-   if(sessionStorage.getItem("istoken")){
-    setIstoken(true);
-    console.log('setIstoken', istoken);
-   }
-  },[istoken]);
+  // useEffect(() => {
+  //  if(sessionStorage.getItem("istoken")){
+  //   setIstoken(true);
+  //   console.log('setIstoken', istoken);
+  //  }
+  // },[istoken]);
 
   return (
     <>

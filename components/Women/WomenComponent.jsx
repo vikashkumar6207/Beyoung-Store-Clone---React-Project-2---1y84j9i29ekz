@@ -1,56 +1,30 @@
-import React, { useEffect, useState } from "react";
+import { UserContext } from "@/Provider/UserProvider";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
 
 const WomenComponent = () => {
+
+
   const [womenData, setWomenData] = useState([]);
-  const [category, setCategory] = useState("");
+  // const [category, setCategory] = useState("");
+  const { categoryHandler } = useContext(UserContext);
 
-  console.log("category", category);
+  // console.log("category", category);
+  const router = useRouter();
 
-  
-  /*  async function womendatafun() {
-    const url = "https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?gender=Women";
-    const myHeaders = new Headers();
-    myHeaders.append("projectID", "zx5u429ht9oj");
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-   const response = await fetch(url, requestOptions)
-    const data = await response.json();
-    // console.log('Womencomp',data.data);
-    setWomenData(data.data);
-  } */
-
-  // useEffect(()=>{
-  //     womendatafun();
-  // },[])
+  function setCategoryfun(e){
+    categoryHandler(e);
+  }
+ 
   return (
     <>
       <div className="flex overflow-auto gap-4">
-        {/*  <div className="flex overflow-auto gap-4">
-        { womenData.map((item, index) => {
-          return (
-            <div  key={index}  className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden">
-              <div>
-                <img
-                  src={item.displayImage}
-                  alt="image"
-                  className="h-72 min-w-full"
-                />
-              </div>
-              <div className="flex flex-col pl-3 pr-3 pt-2 pb-0 mb-0">
-                <p className="text-gray-500">{item.name}</p>
-                <p>₹{item.price}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div> */}
       <div
-          onClick={() => {sessionStorage.setItem("category","kurti")}}
+          onClick={() => {
+            sessionStorage.setItem("category","kurti");
+            setCategoryfun('kurti');
+            router.push('/category');
+          }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
           <img
@@ -69,7 +43,10 @@ const WomenComponent = () => {
         </div>
 
         <div
-          onClick={() => sessionStorage.setItem("category","tshirt")}
+          onClick={() => {sessionStorage.setItem("category","tshirt");
+            router.push('/category');
+          }
+          }
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
           <img
@@ -87,7 +64,9 @@ const WomenComponent = () => {
           </div>
         </div>
         <div
-          onClick={() => sessionStorage.setItem("category","jogger")}
+          onClick={() => {sessionStorage.setItem("category","jogger")
+            router.push('/category');
+          }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
           <img
@@ -105,7 +84,9 @@ const WomenComponent = () => {
           </div>
         </div>
         <div
-          onClick={()=> sessionStorage.setItem("category","shirt")}
+          onClick={()=> {sessionStorage.setItem("category","shirt")
+            router.push('/category');
+          }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
           <img
@@ -123,7 +104,9 @@ const WomenComponent = () => {
           </div>
         </div>
         <div
-          onClick={() => sessionStorage.setItem("category","jumpsuit")}
+          onClick={() => {sessionStorage.setItem("category","jumpsuit")
+            router.push('/category');
+          }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
           <img
@@ -142,7 +125,9 @@ const WomenComponent = () => {
         </div>
 
         <div
-          onClick={() => sessionStorage.setItem("category","jeans")}
+          onClick={() => {sessionStorage.setItem("category","jeans")
+            router.push('/category');
+          }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
           <img

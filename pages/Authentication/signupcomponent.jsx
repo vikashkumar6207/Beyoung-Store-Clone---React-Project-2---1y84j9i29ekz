@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 // import  {useNavigate } from ''
 const Signupcomponent = () => {
-  const [err, setError] = useState();
+  const [Error, setError] = useState();
   const [success, setSuccess] = useState();
 
   const [userStatus, setUserStatus] = useState({
@@ -40,14 +40,15 @@ const Signupcomponent = () => {
       console.log("USER DATA", data.message);
       setError(data.message);
       setSuccess("Register successful..");
-      if (response.ok) {
-        console.log("response ok");
-        setTimeout(() => {
+      // if (response.ok) {
+        // console.log("response ok");
+        /* setTimeout(() => {
           router.push("/login");
-        }, 3000);
-      }
+        }, 3000); */
+      // }
     } catch (error) {
-      console.log("error", error);
+      setError("An error occurred. Please try again.");
+      console.error("Error:", error);
     }
   }
 
@@ -61,7 +62,21 @@ const Signupcomponent = () => {
       };
     });
   }
+  function submitLoginHandler(e) {
+    e.preventDefault();
 
+    if (userStatus.email === "" && userStatus.password === "" && userStatus.name === "") {
+      setError("The email and password is required !");
+    } else if (userStatus.email === "") {
+      setError("The email is required !");
+    } else if (userStatus.password === "") {
+      setError("The password is required !");
+    } else if (userStatus.name === "") {
+      setError("The name is required !");
+    } else {
+      signupFun();
+    }
+  }
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-inherit rounded">
@@ -89,37 +104,40 @@ const Signupcomponent = () => {
               <p>Get Exciting Offers & Track Order</p>
             </div>
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                signupFun();
-              }}
+              onSubmit={ submitLoginHandler}
               className="flex flex-col gap-5"
             >
-              {err ? (
-                <h1 className="text-red-500">{err}</h1>
+              {Error ? (
+                <h1 className="text-red-500">{Error}</h1>
               ) : (
                 <h1 className="text-green-500">{success}</h1>
               )}
               <input
                 type="text"
                 placeholder="Full Name*"
-                required
+                // required
                 className="pl-2 h-10 w-80 border rounded"
-                onChange={(e) => formHandler(e, "name")}
+                onChange={(e) => {formHandler(e, "name")
+                  setError("")
+                }}
               />
               <input
                 type="email"
                 placeholder="Email Address*"
-                required
+                // required
                 className="pl-2 h-10 w-80 border rounded"
-                onChange={(e) => formHandler(e, "email")}
+                onChange={(e) => {formHandler(e, "email")
+                  setError("")
+                }}
               />
               <input
                 type="password"
                 placeholder="password*"
-                required
+                // required
                 className=" pl-2 h-10 w-80 border rounded"
-                onChange={(e) => formHandler(e, "password")}
+                onChange={(e) =>{ formHandler(e, "password")
+                  setError("")
+                }}
               />
               <button
                 type="submit"
