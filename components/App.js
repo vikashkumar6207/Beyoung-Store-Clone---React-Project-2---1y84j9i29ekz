@@ -14,7 +14,7 @@ function App() {
   const [type, setType] = useState();
 
   // set category in localStorage
-  console.log("category", category);
+  // console.log("category", category);
   useEffect(() => {
     localStorage.setItem("category", category);
   }, [category]);
@@ -35,7 +35,7 @@ function App() {
     );
     const data = await response.json();
     setProduct(data.data);
-    console.log("homepageUiApi", data);
+    // console.log("homepageUiApi", data);
   }
 
   useEffect(() => {

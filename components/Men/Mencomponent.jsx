@@ -22,7 +22,7 @@ const Mencomponent = () => {
 
     const response = await fetch(url, requestOptions);
     const data = await response.json();
-    console.log("men data", data.data);
+    // console.log("men data", data.data);
     setMencloth(data.data);
   }
   useEffect(() => {

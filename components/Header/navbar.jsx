@@ -1,14 +1,22 @@
 import Link from "next/link";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import CSS from "@/styles/navbar.module.css";
 import Hovercomp from "@/components/Hovercomponents/Hovercomp";
 import Womenhover from "../Hovercomponents/Womenhover";
+import { UserContext } from "@/Provider/UserProvider";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
-  // const router = ();
+  
+  const {favList,setSearchText} = useContext(UserContext);
+  useEffect(()=>{
+ 
+    setSearchText('hellosetSearchText');
+  },[])
+
   return (
     <>
       <nav className="flex justify-between p-2 items-center border-b">
@@ -89,11 +97,13 @@ const Navbar = () => {
               className="flex items-center justify-center absolute h-3 w-3 bg-yellow-300 rounded-full"
               style={{ fontSize: "10px", top: "-9px", right: "-3px" }}
             >
-              0
+              {favList}
             </span>
           </span>
           <span className="relative">
+            <Link href="/addtocart">
             <MdOutlineShoppingCart />
+            </Link>
             <span
               className="flex items-center justify-center absolute h-3 w-3 bg-yellow-300 rounded-full"
               style={{ fontSize: "10px", top: "-9px", right: "-3px" }}
