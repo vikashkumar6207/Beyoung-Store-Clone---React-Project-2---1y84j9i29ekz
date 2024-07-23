@@ -78,7 +78,6 @@ const Womencomp = () => {
               <details>
                 <summary>CAREGORY</summary>
                 <div className="flex gap-4 flex-wrap">
-                  
                   <div
                     onClick={() => setCategory("shirt")}
                     className="cursor-pointer hover:bg-yellow-300 p-1"
@@ -97,7 +96,7 @@ const Womencomp = () => {
                   >
                     kurti
                   </div>
-                 
+
                   <div
                     onClick={() => setCategory("tshirt")}
                     className="cursor-pointer hover:bg-yellow-300 p-1"
@@ -110,7 +109,6 @@ const Womencomp = () => {
                   >
                     jogger
                   </div>
-                 
                 </div>
               </details>
             </div>
@@ -119,35 +117,34 @@ const Womencomp = () => {
 
         {/* ---------- */}
         <div className="womenpage_main">
-        <div className="flex flex-wrap justify-center gap-2">
-          {womenData.map((item, index) => {
-            const { _id, displayImage, subCategory, size } = item;
-            return (
-              <div
-                key={index}
-                className="flex flex-col max-w-56 border rounded-xl m-3 overflow-hidden"
-              >
+          <div className="flex flex-wrap justify-center gap-2">
+            {womenData.map((item, index) => {
+              const { _id, displayImage, subCategory, size } = item;
+              return (
                 <div
-                  onClick={() => {
-                    sessionStorage.setItem("productId", _id);
-                    router.push("/singleproduct");
-                  }}
+                  key={index}
+                  className="flex flex-col max-w-56 border rounded-xl m-3 overflow-hidden"
                 >
-                  <img
-                    src={item.displayImage}
-                    alt="image"
-                    className="h-72 min-w-full"
-                  />
-                 
+                  <div
+                    onClick={() => {
+                      sessionStorage.setItem("productId", _id);
+                      router.push("/singleproduct");
+                    }}
+                  >
+                    <img
+                      src={item.displayImage}
+                      alt="image"
+                      className="h-72 min-w-full"
+                    />
+                  </div>
+                  <div className="flex flex-col pl-3 pr-3 pt-2 pb-0 mb-0">
+                    <p className="text-gray-500">{item.name}</p>
+                    <p>₹{item.price}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col pl-3 pr-3 pt-2 pb-0 mb-0">
-                  <p className="text-gray-500">{item.name}</p>
-                  <p>₹{item.price}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

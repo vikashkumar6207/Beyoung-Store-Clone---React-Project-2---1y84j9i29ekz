@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 
 export const UserContext = React.createContext({
@@ -9,60 +9,59 @@ export const UserContext = React.createContext({
   tokenHandler: () => {},
   emailHandler: () => {},
   categoryHandler: () => {},
-  logout: ()=>{},
+  logout: () => {},
   setSearchText: null,
-  favList: 0,
-  setFavList: ()=>{},
-
+  updateState: () => {},
 });
+// ---
 
-const UserProvider = (props) => {
+// const [state, setState] = useState(initialState);
+
+// ---
+const UserProvider = ({ children }) => {
   const [getToken, setToken] = useState();
   const [getName, setName] = useState();
   const [getEmail, setEmail] = useState();
   const [getCategoey, setCategory] = useState();
- 
+  const [favList, setFavList] = useState();
 
-  useEffect(()=>{
+  useEffect(() => {
     setToken(sessionStorage.getItem("token") || "");
     setName(sessionStorage.getItem("name") || "");
     setEmail(sessionStorage.getItem("email") || "");
     setCategory(sessionStorage.getItem("category") || "");
-    
-  },[])
-  const [searchText, setSearchText] = useState('');
-  const [favList, setFavList] = useState();
+  }, []);
+  const [searchText, setSearchText] = useState("");
+  // const [favList, setFavList] = useState();
 
-
+  const updateState = (favList) => {
+    setFavList(favList);
+  };
 
   // const [getCategoey, setCategory] = useState('');
 
-  console.log('USER PROVIDER LOGS gggggggg',searchText, favList,getName, getToken,getEmail );
+  // console.log('USER PROVIDER LOGS gggggggg',searchText, favList,getName, getToken,getEmail );
 
-  const { children } = props;
-
- 
+  // const { children } = props;
 
   function tokenHandler(token) {
-    console.log('providertoken',token);
-      setToken(token);
-      sessionStorage.setItem("token", token);
-}
-
+    console.log("providertoken", token);
+    setToken(token);
+    sessionStorage.setItem("token", token);
+  }
 
   function nameHandler(name) {
-
-        setName(name);
-        sessionStorage.setItem("name", name);
+    setName(name);
+    sessionStorage.setItem("name", name);
   }
-  function emailHandler(email){
+  function emailHandler(email) {
     setEmail(email);
-    sessionStorage.setItem("email",email);
+    sessionStorage.setItem("email", email);
   }
 
-  function categoryHandler(category){
+  function categoryHandler(category) {
     setCategory(category);
-    sessionStorage.setItem('category', category);
+    sessionStorage.setItem("category", category);
   }
   const logout = () => {
     setName("");
@@ -73,7 +72,7 @@ const UserProvider = (props) => {
   const valueObj = {
     getName,
     getToken,
-   
+
     tokenHandler,
     nameHandler,
     emailHandler,
@@ -85,15 +84,14 @@ const UserProvider = (props) => {
     logout,
 
     favList,
-    setFavList,
+    updateState,
   };
 
   return (
     <>
-      <UserContext.Provider value={valueObj}>{props.children}</UserContext.Provider>
+      <UserContext.Provider value={valueObj}>{children}</UserContext.Provider>
     </>
   );
 };
 
 export default UserProvider;
-

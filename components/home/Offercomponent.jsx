@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 const Offercomponent = () => {
   return (
     <>
-     <Carousel autoPlay infiniteLoop showThumbs={false}>
+      <Carousel autoPlay infiniteLoop showThumbs={false}>
         <div>
           <img src="./assets/offer1.jpg" alt="" />
         </div>
@@ -31,7 +31,7 @@ const Offercomponent = () => {
         </div>
       </Carousel>
     </>
-  )
-}
+  );
+};
 
 export default Offercomponent;

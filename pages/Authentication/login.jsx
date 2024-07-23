@@ -67,11 +67,6 @@ const Logincomponent = () => {
       console.error("Error:", error);
     }
   }
-  //   function tokenfun(token) {
-  //     console.log('istoken',token);
-  //       // setToken(token);
-  //       sessionStorage.setItem("istoken", token);
-  // }
 
   function formHandler(e, key) {
     const val = e.target.value;
@@ -87,7 +82,11 @@ const Logincomponent = () => {
   function submitLoginHandler(e) {
     e.preventDefault();
 
-    if (loginstate.email === "" && loginstate.password === "" && loginstate.name === "") {
+    if (
+      loginstate.email === "" &&
+      loginstate.password === "" &&
+      loginstate.name === ""
+    ) {
       setError("The email and password is required !");
     } else if (loginstate.email === "") {
       setError("The email is required !");
@@ -100,7 +99,7 @@ const Logincomponent = () => {
     }
   }
 
-  useEffect(()=>{},[]);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -136,8 +135,8 @@ const Logincomponent = () => {
                 // required
                 className="pl-2 h-10 w-80 border rounded"
                 onChange={(e) => {
-                  formHandler(e, "name")
-                  setError('')
+                  formHandler(e, "name");
+                  setError("");
                 }}
               />
               <input
@@ -146,8 +145,8 @@ const Logincomponent = () => {
                 // required
                 className="pl-2 h-10 w-80 border rounded"
                 onChange={(e) => {
-                  formHandler(e, "email")
-                  setError('')
+                  formHandler(e, "email");
+                  setError("");
                 }}
               />
               <input
@@ -156,15 +155,14 @@ const Logincomponent = () => {
                 // required
                 className=" pl-2 h-10 w-80 border rounded"
                 onChange={(e) => {
-                   formHandler(e, "password")
-                   setError('')
-                  }}
+                  formHandler(e, "password");
+                  setError("");
+                }}
               />
               <button
                 type="submit"
                 className="w-80 h-10 rounded font-bold"
                 style={{ background: "#51cccc", color: "#fff" }}
-                
               >
                 Sign In
               </button>

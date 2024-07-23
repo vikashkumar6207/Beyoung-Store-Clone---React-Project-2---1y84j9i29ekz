@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 const Favorites = () => {
   const router = useRouter();
   const [favItem, setFavItem] = useState([]);
+  const [reRander, serRerander] = useState(false);
 
   useEffect(() => {
     async function getFavorites() {
@@ -26,16 +27,13 @@ const Favorites = () => {
     }
 
     getFavorites();
-  }, []);
+  }, [reRander]);
 
   function deleteFunction() {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
     const myHeaders = new Headers();
     myHeaders.append("projectId", "zx5u429ht9oj");
-    myHeaders.append(
-      "Authorization",
-      `Bearer ${token}`
-    );
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
     const requestOptions = {
       method: "DELETE",
@@ -52,21 +50,22 @@ const Favorites = () => {
       .catch((error) => console.error(error));
   }
 
-
   return (
     <>
       <div>
         <button
           className="h-10 w-48 bg-yellow-300 m-2 rounded-md"
-          onClick={deleteFunction}
+          onClick={() => {
+            deleteFunction();
+            serRerander(true);
+          }}
         >
           Reset favItem
         </button>
 
         <div className="flex flex-wrap justify-center gap-4">
           {favItem.map((item, index) => {
-            //   const { _id, displayImage, subCategory, size } = item;
-            console.log("item itemsssssssss", item);
+            // console.log("item itemsssssssss", item);
             return (
               <div
                 key={index}

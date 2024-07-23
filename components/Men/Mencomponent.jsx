@@ -29,32 +29,36 @@ const Mencomponent = () => {
     menclothApi();
   }, []);
 
-
   return (
     <>
       <div className="flex overflow-auto gap-4 ">
-        {mencloth && mencloth.map((item, index) => {
-            const {_id,displayImage,subCategory,size} = item;
-          return (
-            <div key={index} className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden">
-              <div onClick={()=>{
-                   sessionStorage.setItem('productId', _id);
-                    router.push('/singleproduct')
-                  }
-                  }>
-                <img
-                  src={item.displayImage}
-                  alt="image"
-                  className="h-80 min-w-full"
-                />
+        {mencloth &&
+          mencloth.map((item, index) => {
+            const { _id, displayImage, subCategory, size } = item;
+            return (
+              <div
+                key={index}
+                className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
+              >
+                <div
+                  onClick={() => {
+                    sessionStorage.setItem("productId", _id);
+                    router.push("/singleproduct");
+                  }}
+                >
+                  <img
+                    src={item.displayImage}
+                    alt="image"
+                    className="h-80 min-w-full"
+                  />
+                </div>
+                <div className="flex flex-col pl-3 pr-3 pt-2 pb-0 mb-0">
+                  <p className="text-gray-500">{item.name}</p>
+                  <p>₹{item.price}</p>
+                </div>
               </div>
-              <div className="flex flex-col pl-3 pr-3 pt-2 pb-0 mb-0">
-                <p className="text-gray-500">{item.name}</p>
-                <p>₹{item.price}</p>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </>
   );

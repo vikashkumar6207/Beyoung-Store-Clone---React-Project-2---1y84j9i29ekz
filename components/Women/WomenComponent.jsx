@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 
 const WomenComponent = () => {
-
-
   const [womenData, setWomenData] = useState([]);
   // const [category, setCategory] = useState("");
   const { categoryHandler } = useContext(UserContext);
@@ -12,18 +10,18 @@ const WomenComponent = () => {
   // console.log("category", category);
   const router = useRouter();
 
-  function setCategoryfun(e){
+  function setCategoryfun(e) {
     categoryHandler(e);
   }
- 
+
   return (
     <>
       <div className="flex overflow-auto gap-4">
-      <div
+        <div
           onClick={() => {
-            sessionStorage.setItem("category","kurti");
-            setCategoryfun('kurti');
-            router.push('/category');
+            sessionStorage.setItem("category", "kurti");
+            setCategoryfun("kurti");
+            router.push("/category");
           }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
@@ -43,10 +41,10 @@ const WomenComponent = () => {
         </div>
 
         <div
-          onClick={() => {sessionStorage.setItem("category","tshirt");
-            router.push('/category');
-          }
-          }
+          onClick={() => {
+            sessionStorage.setItem("category", "tshirt");
+            router.push("/category");
+          }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
           <img
@@ -64,8 +62,9 @@ const WomenComponent = () => {
           </div>
         </div>
         <div
-          onClick={() => {sessionStorage.setItem("category","jogger")
-            router.push('/category');
+          onClick={() => {
+            sessionStorage.setItem("category", "jogger");
+            router.push("/category");
           }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
@@ -84,8 +83,9 @@ const WomenComponent = () => {
           </div>
         </div>
         <div
-          onClick={()=> {sessionStorage.setItem("category","shirt")
-            router.push('/category');
+          onClick={() => {
+            sessionStorage.setItem("category", "shirt");
+            router.push("/category");
           }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
@@ -104,8 +104,9 @@ const WomenComponent = () => {
           </div>
         </div>
         <div
-          onClick={() => {sessionStorage.setItem("category","jumpsuit")
-            router.push('/category');
+          onClick={() => {
+            sessionStorage.setItem("category", "jumpsuit");
+            router.push("/category");
           }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
@@ -125,8 +126,9 @@ const WomenComponent = () => {
         </div>
 
         <div
-          onClick={() => {sessionStorage.setItem("category","jeans")
-            router.push('/category');
+          onClick={() => {
+            sessionStorage.setItem("category", "jeans");
+            router.push("/category");
           }}
           className="flex flex-col min-w-64 border rounded-xl m-3 overflow-hidden"
         >
@@ -144,8 +146,6 @@ const WomenComponent = () => {
             </p>
           </div>
         </div>
-
-        
       </div>
     </>
   );

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Cargojoggers = () => {
   return (
-    <div className='flex justify-center'>
-    <img src="./assets/comming-soon.jpg" alt="" />
-  </div>
-  )
-}
+    <div className="flex justify-center">
+      <img src="./assets/comming-soon.jpg" alt="" />
+    </div>
+  );
+};
 
 export default Cargojoggers;

@@ -40,12 +40,6 @@ const Signupcomponent = () => {
       console.log("USER DATA", data.message);
       setError(data.message);
       setSuccess("Register successful..");
-      // if (response.ok) {
-        // console.log("response ok");
-        /* setTimeout(() => {
-          router.push("/login");
-        }, 3000); */
-      // }
     } catch (error) {
       setError("An error occurred. Please try again.");
       console.error("Error:", error);
@@ -65,7 +59,11 @@ const Signupcomponent = () => {
   function submitLoginHandler(e) {
     e.preventDefault();
 
-    if (userStatus.email === "" && userStatus.password === "" && userStatus.name === "") {
+    if (
+      userStatus.email === "" &&
+      userStatus.password === "" &&
+      userStatus.name === ""
+    ) {
       setError("The email and password is required !");
     } else if (userStatus.email === "") {
       setError("The email is required !");
@@ -103,10 +101,7 @@ const Signupcomponent = () => {
               </div>
               <p>Get Exciting Offers & Track Order</p>
             </div>
-            <form
-              onSubmit={ submitLoginHandler}
-              className="flex flex-col gap-5"
-            >
+            <form onSubmit={submitLoginHandler} className="flex flex-col gap-5">
               {Error ? (
                 <h1 className="text-red-500">{Error}</h1>
               ) : (
@@ -117,8 +112,9 @@ const Signupcomponent = () => {
                 placeholder="Full Name*"
                 // required
                 className="pl-2 h-10 w-80 border rounded"
-                onChange={(e) => {formHandler(e, "name")
-                  setError("")
+                onChange={(e) => {
+                  formHandler(e, "name");
+                  setError("");
                 }}
               />
               <input
@@ -126,8 +122,9 @@ const Signupcomponent = () => {
                 placeholder="Email Address*"
                 // required
                 className="pl-2 h-10 w-80 border rounded"
-                onChange={(e) => {formHandler(e, "email")
-                  setError("")
+                onChange={(e) => {
+                  formHandler(e, "email");
+                  setError("");
                 }}
               />
               <input
@@ -135,8 +132,9 @@ const Signupcomponent = () => {
                 placeholder="password*"
                 // required
                 className=" pl-2 h-10 w-80 border rounded"
-                onChange={(e) =>{ formHandler(e, "password")
-                  setError("")
+                onChange={(e) => {
+                  formHandler(e, "password");
+                  setError("");
                 }}
               />
               <button

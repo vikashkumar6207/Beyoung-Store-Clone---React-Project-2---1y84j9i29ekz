@@ -11,7 +11,7 @@ const Singleproduct = () => {
   const router = useRouter();
   // const token = sessionStorage.getItem("productId")
 
-  const { setFavList } = useContext(UserContext);
+  const { updateState } = useContext(UserContext);
 
   const [product, setProduct] = useState({});
   const [images, setImages] = useState([]);
@@ -19,11 +19,8 @@ const Singleproduct = () => {
   const [size, setSize] = useState([]);
   const [like, setLike] = useState(false);
 
-
-  
   // const [likeItem, setLikeItem] = useState([]);
   // const id = sessionStorage.getItem("productId");
-  // const token = sessionStorage.getItem("productId")
 
   async function singleproductApi() {
     const url = `https://academics.newtonschool.co/api/v1/ecommerce/product/${sessionStorage.getItem(
@@ -58,71 +55,117 @@ const Singleproduct = () => {
   function addFavorites() {
     let _id = product._id;
     const token = sessionStorage.getItem("token");
-    {
-      console.log("productId token", _id, token);
+    if (token) {
+      {
+        console.log("productId token", _id, token);
+      }
+      const myHeaders = new Headers();
+      myHeaders.append("projectID", "zx5u429ht9oj");
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${token}`);
+
+      const raw = JSON.stringify({
+        productId: _id,
+      });
+
+      const requestOptions = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch(
+        "https://academics.newtonschool.co/api/v1/ecommerce/wishlist/",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          console.log("setFavList", result);
+          updateState(result.results);
+        })
+        .catch((error) => console.error(error));
+    } else {
+      router.push("/login");
     }
-    const myHeaders = new Headers();
-    myHeaders.append("projectID", "zx5u429ht9oj");
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${token}`);
-
-    const raw = JSON.stringify({
-      productId: _id,
-    });
-
-    const requestOptions = {
-      method: "PATCH",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("https://academics.newtonschool.co/api/v1/ecommerce/wishlist/", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("setFavList", result);
-        setFavList(result.results);
-      })
-      .catch((error) => console.error(error));
   }
 
   // Add to cart function
 
   const [quantity, setQuantity] = useState();
 
-  function setNumFun(e){
+  function setNumFun(e) {
     setQuantity(e.target.value);
   }
- async function addToCartfunction() {
-  const token = sessionStorage.getItem("token");
-  if(token){
-  const myHeaders = new Headers();
-myHeaders.append("projectID", "zx5u429ht9oj");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Authorization", `Bearer ${token}`);
+  async function addToCartfunction() {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      const myHeaders = new Headers();
+      myHeaders.append("projectID", "zx5u429ht9oj");
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${token}`);
 
-const raw = JSON.stringify({
-  "quantity": quantity,
-  "size": "M"
-});
+      const raw = JSON.stringify({
+        quantity: quantity,
+        size: "M",
+      });
 
-const requestOptions = {
-  method: "PATCH",
-  headers: myHeaders,
-  body: raw,
-  redirect: "follow"
-};
+      const requestOptions = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
-fetch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${product._id}`, requestOptions)
-  .then((response) => response.text())
-  // .then((result) => console.log('addToCartfunction',result))
-  .catch((error) => console.error(error));
-}else {
-  router.push('/login');
-}
+      fetch(
+        `https://academics.newtonschool.co/api/v1/ecommerce/cart/${product._id}`,
+        requestOptions
+      )
+        .then((response) => response.text())
+        // .then((result) => console.log('addToCartfunction',result))
+        .catch((error) => console.error(error));
+    } else {
+      router.push("/login");
+    }
   }
 
- 
+  async function buyNowFun() {
+    const myHeaders = new Headers();
+    myHeaders.append("projectID", "zx5u429ht9oj");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTI0ZTE1MTgwYjk2MWUzOGJlMWU5YyIsImlhdCI6MTcyMTQ5MTc0NSwiZXhwIjoxNzUzMDI3NzQ1fQ.AbbrVvGkKNiE6MyUq9OlM74cgoT8gKJvwpSzlqxF-eo"
+    );
+
+    const raw = JSON.stringify({
+      productId: "652675ccdaf00355a78380f8",
+      quantity: 2,
+      addressType: "HOME",
+      address: {
+        street: "123 Main St",
+        city: "Ranchi",
+        state: "Jharkhand",
+        country: "India",
+        zipCode: "12345",
+      },
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://academics.newtonschool.co/api/v1/ecommerce/order",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log("buyNowFun", result))
+      .catch((error) => console.error(error));
+  }
 
   return (
     <>
@@ -146,7 +189,14 @@ fetch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${product._id}`, 
             {selectedImage ? (
               <div className="relative ">
                 <p
-                  onClick={() => setLike(!like)}
+                  onClick={() => {
+                    const token = sessionStorage.getItem("productId");
+                    if (!token) {
+                      router.push("/login");
+                    } else {
+                      setLike(!like);
+                    }
+                  }}
                   className="overflow-hidden flex items-center justify-center absolute right-2 top-2 h-8 w-8 rounded-full bg-yellow-50"
                 >
                   {like ? (
@@ -189,7 +239,11 @@ fetch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${product._id}`, 
           </div>
           <p>
             QTY:
-            <select className="h-10 w-14 p-2 border m-1" value={quantity} onChange={setNumFun}>
+            <select
+              className="h-10 w-14 p-2 border m-1"
+              value={quantity}
+              onChange={setNumFun}
+            >
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -214,10 +268,51 @@ fetch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${product._id}`, 
             <button
               className="flex justify-center items-center w-72 h-12 rounded"
               style={{ background: "#f9eb28" }}
+              onClick={buyNowFun}
             >
               <MdOutlineArrowCircleRight />
               BUY NOW
             </button>
+          </div>
+          <div className="mt-3">
+            <div className="bg-slate-100 p-3">
+              <p className="font-bold text-2xl">Delivery Options</p>
+              <div className=" relative mt-2">
+                <input
+                  type="Number"
+                  minLength={6}
+                  maxLength={6}
+                  required
+                  placeholder="Enter your city Pincode"
+                  className="h-10 w-96 rounded p-2 bg-white text-sm "
+                />
+                <button className="h-6 absolute top-2 left-80  bg-slate-700 text-white pl-2 pr-2 rounded">
+                  Check
+                </button>
+              </div>
+              <div className="flex justify-between p-2">
+                <div>
+                  <img
+                    src="./pin-code1.png"
+                    alt="image"
+                    className="h-14 border-r pr-14"
+                  />
+                  <p>Free Shipping</p>
+                </div>
+                <div className="flex justify-center flex-col">
+                  <img
+                    src="./pin-code2.png"
+                    alt="image"
+                    className="h-14 border-r  pr-14"
+                  />
+                  <p>15 Days Return</p>
+                </div>
+                <div>
+                  <img src="./pin-code3.png" alt="image" className="h-14" />
+                  <p>Cash on Delivery</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

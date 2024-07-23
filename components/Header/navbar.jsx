@@ -10,17 +10,15 @@ import { UserContext } from "@/Provider/UserProvider";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
-  
-  const {favList,setSearchText} = useContext(UserContext);
-  useEffect(()=>{
- 
-    setSearchText('hellosetSearchText');
-  },[])
+  const [isActive, setIsActive] = useState(true);
+
+  const { favList } = useContext(UserContext);
+  console.log("favList", favList);
 
   return (
     <>
       <nav className="flex justify-between p-2 items-center border-b">
-        <ul className="flex gap-5 items-center ">
+        <ul className="flex gap-2 items-center ">
           <li>
             <Link href="/">
               <img
@@ -33,7 +31,7 @@ const Navbar = () => {
           <li className="men_menu">
             <Link
               href="/men"
-              className="hover:bg-yellow-300 pl-2 pr-2 pt-1 pb-1"
+              className="hover:bg-yellow-300 pl-2 pr-2 pt-1 pb-1 "
             >
               Men
             </Link>
@@ -85,9 +83,20 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <div className="flex gap-4">
-          <span>
-            <CiSearch />
+
+        <div className="flex gap-4 items-center">
+          <span className=" search_container_parent">
+            <div className={"search active"}>
+              <input
+                type="text"
+                placeholder="Search..."
+                className="search_box"
+              />
+              <button className="search_btn">
+                {" "}
+                <CiSearch onClick={() => setIsActive(!isActive)} />
+              </button>
+            </div>
           </span>
           <span className=" relative ">
             <Link href="/favorites">
@@ -102,7 +111,7 @@ const Navbar = () => {
           </span>
           <span className="relative">
             <Link href="/addtocart">
-            <MdOutlineShoppingCart />
+              <MdOutlineShoppingCart />
             </Link>
             <span
               className="flex items-center justify-center absolute h-3 w-3 bg-yellow-300 rounded-full"

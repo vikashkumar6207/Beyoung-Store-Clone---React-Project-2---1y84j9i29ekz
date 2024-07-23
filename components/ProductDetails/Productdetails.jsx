@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 const ProductDetails = ({ product }) => {
+  const router = useRouter();
+
   return (
     <div className="flex gap-7">
       <div

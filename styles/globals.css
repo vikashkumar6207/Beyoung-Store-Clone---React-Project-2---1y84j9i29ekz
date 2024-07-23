@@ -11,6 +11,7 @@
 
 .men_menu {
   position: relative;
+  height: 80%;
 }
 .men_submenu {
   display: none;
@@ -59,12 +60,72 @@
 }
 
 /* ----------- */
-.women_aside{
+.women_aside {
   width: 20vw;
   height: 100vh;
 }
 
-.womenpage_main{
+.womenpage_main {
   width: calc(100vw - 24vw);
   margin-left: 1vw;
+}
+
+/* --------Search ------------- */
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.search_btn,
+.close_btn {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  padding-left: 10px;
+  position: absolute;
+}
+
+.search_box {
+  width: 1rem;
+  height: 1rem;
+  padding: 1rem;
+  /* border-radius: 1rem; */
+  outline: none;
+}
+
+.close_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: black; */
+  color: orangered;
+  z-index: -1;
+}
+
+.active .search_box {
+  width: 14rem;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+.active .search_btn {
+  transform: translate(5.45rem) scale(1.25);
+  border-left: 1px solid black;
+  margin-left: 10px;
+  z-index: 20;
+  height: 2rem;
+  width: 2rem;
+
+  background: black;
+}
+
+.active .close_btn {
+  z-index: 0;
+  transform: translate(6.25rem);
+  background: black;
 }

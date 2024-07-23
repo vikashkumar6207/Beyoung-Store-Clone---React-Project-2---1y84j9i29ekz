@@ -1,17 +1,14 @@
-
-import React from 'react'
-import Mencomponent from '@/components/Men/Mencomponent';
-import Menpagecomp from '@/components/Men/Menpagecomp';
+import React from "react";
+import Mencomponent from "@/components/Men/Mencomponent";
+import Menpagecomp from "@/components/Men/Menpagecomp";
 const Men = () => {
   return (
     <>
-    <div>
-
-      {/* <Mencomponent /> */}
-      <Menpagecomp />
-    </div>
+      <div>
+        <Menpagecomp />
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default Men;
