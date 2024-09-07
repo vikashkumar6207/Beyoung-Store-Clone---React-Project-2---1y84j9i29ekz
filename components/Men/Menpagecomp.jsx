@@ -6,6 +6,8 @@ const Menpagecomp = () => {
   const [limit, setLimit] = useState([]);
   const [color, setColor] = useState("");
   const [category, setCategory] = useState("");
+  const [colorstate, setColorstate] = useState(false);
+  const [categorystate, setCategorystate] = useState(false);
   async function limitApiCall() {
     let url;
     if (color) {
@@ -42,9 +44,9 @@ const Menpagecomp = () => {
           <h1 className="text-xl font-bold text-gray-500">FILTER</h1>
           <div>
             <div>
-              <details>
-                <summary>COLOR</summary>
-                <div className="flex gap-4 flex-wrap">
+              <div className="relative " >
+                <button>COLOR <span className="absolute right-6" onClick={()=>setColorstate(!colorstate)}>{` ${colorstate ? '-':'+'}`}</span></button>
+                {colorstate?<div className="flex gap-4 flex-wrap">
                   <div
                     className="bg-red-600 h-8 w-8 rounded-full cursor-pointer"
                     onClick={() => setColor("RED")}
@@ -73,11 +75,11 @@ const Menpagecomp = () => {
                     className="bg-white border h-8 w-8 rounded-full cursor-pointer"
                     onClick={() => setColor("WHITE")}
                   ></div>
-                </div>
-              </details>
-              <details>
-                <summary>CAREGORY</summary>
-                <div className="flex gap-4 flex-wrap">
+                </div>:""}
+              </div>
+              <div className="relative " >
+                <button>CAREGORY <span  onClick={()=>setCategorystate(!categorystate)} className="absolute right-6 ">{` ${categorystate ? '-':'+'}`}</span></button>
+               {categorystate? <div className="flex gap-4 flex-wrap">
                   <div
                     onClick={() => setCategory("hoodie")}
                     className="cursor-pointer hover:bg-yellow-300 p-1"
@@ -132,8 +134,8 @@ const Menpagecomp = () => {
                   >
                     trouser
                   </div>
-                </div>
-              </details>
+                </div>:""}
+              </div>
             </div>
           </div>
         </div>
